@@ -1,5 +1,6 @@
 {
   "schemaVersion": 2,
   "dockerfilePath": "./Dockerfile",
-  "httpPort": 8000
+  "httpPort": 8000,
+  "forceNoCache": true
 }
