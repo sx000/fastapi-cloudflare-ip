@@ -18,7 +18,7 @@ def is_cloudflare_ip(ip):
     except ValueError:
         return False
 
-@app.get("/")
+@app.get("/test")
 async def get_ip(request: Request):
     # Основные данные
     client_ip = request.client.host
