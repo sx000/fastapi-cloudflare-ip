@@ -1,15 +1,14 @@
-# Используем официальный образ Python
-FROM python:3.10
+# Dockerfile
+FROM python:3.10-slim as builder
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
-
-# Копируем файлы
 COPY requirements.txt .
-COPY app ./app
+RUN pip install --user --no-cache-dir -r requirements.txt
 
-# Устанавливаем зависимости
-RUN pip install --no-cache-dir -r requirements.txt
+FROM python:3.10-slim
+WORKDIR /app
+COPY --from=builder /root/.local /root/.local
+COPY . .
 
-# Запускаем FastAPI на 0.0.0.0:8000
+ENV PATH=/root/.local/bin:$PATH
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
