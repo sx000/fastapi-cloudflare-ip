@@ -10,7 +10,7 @@ CLOUDFLARE_IP_RANGES = [
     "197.234.240.0/22", "198.41.128.0/17", "162.158.0.0/15", "104.16.0.0/13",
     "104.24.0.0/14", "172.64.0.0/13", "131.0.72.0/22"
 ]
-# todo: add logging
+
 def is_cloudflare_ip(ip):
     try:
         ip_addr = ipaddress.ip_address(ip)
@@ -18,17 +18,14 @@ def is_cloudflare_ip(ip):
     except ValueError:
         return False
 
-@app.get("/test")
+@app.get("/test")  # ✅ Правильный путь
 async def get_ip(request: Request):
-    # Основные данные
     client_ip = request.client.host
     cf_ip = request.headers.get("CF-Connecting-IP", "Not provided")
     cf_check = is_cloudflare_ip(client_ip)
     
-    # Все заголовки
     headers = dict(request.headers.items())
     
-    # Формируем ответ
     response_data = {
         "ip_info": {
             "client_ip": client_ip,
