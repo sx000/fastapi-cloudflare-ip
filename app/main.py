@@ -10,7 +10,7 @@ CLOUDFLARE_IP_RANGES = [
     "197.234.240.0/22", "198.41.128.0/17", "162.158.0.0/15", "104.16.0.0/13",
     "104.24.0.0/14", "172.64.0.0/13", "131.0.72.0/22"
 ]
-
+# todo: add logging
 def is_cloudflare_ip(ip):
     try:
         ip_addr = ipaddress.ip_address(ip)
