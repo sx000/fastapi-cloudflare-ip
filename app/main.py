@@ -22,7 +22,7 @@ def is_cloudflare_ip(ip):
 @app.get("/")
 async def get_ip(request: Request):
     client_ip = request.client.host  # IP, с которого пришёл запрос
-    cf_ip = request.headers.get("CF-Connecting-IP", client_ip)  # Реальный IP пользователя через Cloudflare
+    cf_ip = request.headers.get("CF-Connecting-IP", "pizdec")  # Реальный IP пользователя через Cloudflare
 
     cf_check = is_cloudflare_ip(client_ip)  # Проверяем, действительно ли запрос идёт через Cloudflare
 
